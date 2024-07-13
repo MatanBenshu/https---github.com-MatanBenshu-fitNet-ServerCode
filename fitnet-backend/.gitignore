@@ -147,3 +147,4 @@ dist/
 # Windows
 Thumbs.db
 ehthumbs.db
+doc/*

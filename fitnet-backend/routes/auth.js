@@ -2,12 +2,16 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
+
 router.post('/register', async (req, res) => {
-    const { username, email, password, firstName, lastName, birthDate } = req.body;
+    const { username, email, password, firstName, lastName, birthDate, gender, address } = req.body;
     try {
-        const newUser = new User({ username, email, password, firstName, lastName, birthDate });
-        await newUser.save();
-        res.status(200).json({ success: true, message: 'User registered successfully' });
+        const newUser = new User({ username, email, password, firstName, lastName, birthDate, gender, address });
+        await newUser
+        .save();
+        const user = await User.findOne({email})
+        
+        res.status(200).json({ success: true, message: 'User registered successfully',user});
     } catch (error) {
         res.status(500).json({ success: false, message: 'Error registering user' });
     }
